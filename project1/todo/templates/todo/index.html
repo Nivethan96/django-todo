@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<form action="{% url 'todo:addItem' %}" method="post">
+		{% csrf_token %}
+		<div class="form-group">
+			<label for="inputText"></label>
+			<input type="text" name="todo-content" id="inputText" placeholder="Add Item" value="" />
+			<input class="btn btn-primary" type="submit" value="Add">
+		</div>
+	</form>
+
+	{% if todo_list %}
+		{% for todo in todo_list %}
+			<li>{{ todo.todo_text }}</li>
+		{% endfor %}
+	{% else %}
+		No Items added
+	{% endif %}
+
+{% endblock content %}
